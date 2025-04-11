@@ -1,88 +1,77 @@
-# 🛡️ Diamond Model Report – Ransomware Attack on French Regional Hospital (March 2024)
+# 🛡️ Diamond Model Report – Ransomware Attack on Lyon Hospital (March 2024)
 
-## 💠 Adversary
-- **Name**: Unknown (Black Basta affiliate)
-- **Type**: Financially motivated cybercriminal group
-- **Operator**: Independent threat actor leveraging Ransomware-as-a-Service (RaaS)
-- **Motivation**: Extortion and monetary gain
-- **Attribution Confidence**: Medium (based on malware artifacts and C2 infrastructure)
+## 🔷 Adversary
+
+- **Name:** Unknown actor (suspected Black Basta Ransomware affiliate)
+- **Type:** Financially motivated cybercriminal
+- **Operator:** Likely individual or small group leveraging Ransomware-as-a-Service (RaaS)
+- **Customer:** Possibly part of a broader organized cybercrime group
+- **Motivation:** Financial gain via extortion (ransom demand)
+- **Attribution Confidence:** Medium
+  - Based on malware analysis, TTPs, and infrastructure overlaps
 
 ---
 
-## 🧠 Capability
-- **Malware**: Black Basta ransomware variant
-- **Initial Access**: Spear-phishing via malicious PDF (embedded exploit)
-- **Exploitation**: PDF reader vulnerability (CVE-XXXX-YYYY)
-- **Execution**: Shellcode > reverse shell > PowerShell payload
-- **Persistence**: Local admin account creation, scheduled tasks
-- **Lateral Movement**: Credential dumping (LSASS), RDP pivoting
-- **Impact**:
-  - Data encryption
-  - Exfiltration of 40 GB of sensitive records
-  - Disruption of medical services
-- **Ransom Demand**: €2.5M in Monero within 96 hours
+## 🛠️ Capability
+
+- **Initial Access:**
+  - Spear-phishing email with malicious PDF attachment
+  - Spoofed identity of trusted medical supplier
+- **Exploitation:**
+  - Vulnerability in hospital’s PDF reader software (possible known CVE)
+- **Execution and Lateral Movement:**
+  - Reverse shell established to remote C2
+  - PowerShell scripts used for lateral movement
+  - Credential harvesting from memory (LSASS)
+  - Creation of local admin accounts for persistence
+- **Malware Deployed:**
+  - Black Basta ransomware (custom variant)
+- **Exfiltration:**
+  - Over 40 GB of patient records stolen over HTTPS to a VPS in Russia
+- **Impact:**
+  - 70% of hospital systems encrypted
+  - Disruption of critical services (e.g., MRI, critical care)
+  - Ransom demand: €2.5 million in Monero within 96 hours
 
 ---
 
 ## 🌐 Infrastructure
-- **Initial C2 Server**: `185.203.118.144` (bulletproof hosted in Moldova)
-- **Staging Server**: Compromised medical supplier site in Romania
-- **Exfiltration Channel**: Encrypted HTTPS tunnel to VPS in Russia
-- **Phishing Domain**: `hr-careers[.]fr` (spoofed)
-- **Stolen Email Used**: `hr.admin@hospital-france[.]org`
+
+- **C2 Infrastructure:**
+  - VPS hosted in Moldova (IP: `185.203.118.144`)
+- **Phishing Domain:**
+  - `hr-careers[.]fr` — fake domain spoofing trusted contact
+- **Staging Server:**
+  - Compromised Romanian medical supplier website
+- **Exfiltration Endpoint:**
+  - VPS located in Russia, receiving stolen data via HTTPS
+- **Infrastructure Types:**
+  - **Type 1:** Actor-owned VPS, phishing domain
+  - **Type 2:** Compromised third-party site used as intermediary
+- **Service Providers Involved:**
+  - Hosting providers (Moldova, Russia)
+  - Domain registrars
+  - Compromised webmail system (used for phishing)
 
 ---
 
-## 🏥 Victim
-- **Organization**: Regional Hospital, Southern France
-- **Persona**: Public healthcare provider, critical infrastructure
-- **Assets Targeted**:
-  - Active Directory Domain Controllers
-  - EMR (Electronic Medical Records) systems
-  - Radiology imaging servers
-  - ICU monitoring equipment
-  - HR & Finance Department endpoints
-- **Impact Summary**:
-  - System-wide encryption in 5 departments
-  - 7-day disruption in ICU and ER operations
-  - Forced emergency redirection of patients
-  - Triggered GDPR investigation
+## 🎯 Victim
+
+- **Organization:** Public Regional Hospital, Lyon, France
+- **Sector:** Healthcare
+- **Victim Persona:**
+  - Medical professionals
+  - Public hospital staff
+  - Critical infrastructure operators
+- **Victim Assets:**
+  - Internal Windows domain network
+  - Patient records and EMR database servers
+  - MRI scheduling systems and endpoints
+  - VPN appliances and email servers
+  - Vulnerable third-party PDF reader
 
 ---
 
-## 🧭 Optional Axes
+## 📌 Summary
 
-### Social/Political Context
-- Surge in healthcare-targeting ransomware post-COVID
-- Increased vulnerabilities due to outdated hospital IT infrastructure
-
-### Technology Context
-- Unpatched software vulnerability in PDF reader allowed easy exploitation
-- Weak endpoint defense (no EDR or anomaly detection)
-
----
-
-## 📎 Appendix: Indicators of Compromise (IOCs)
-
-| Type        | Value                         |
-|-------------|-------------------------------|
-| IP Address  | 185.203.118.144               |
-| Domain      | hr-careers[.]fr               |
-| Email       | hr.admin@hospital-france.org  |
-| Hash (SHA256) | `e3b0c44298fc1c149afbf4c8996fb924...` |
-| CVE         | CVE-XXXX-YYYY                 |
-
----
-
-## 🧩 Suggested Mitigations
-- Patch all document rendering software (e.g., Adobe Reader, Foxit)
-- Block outbound HTTPS to known C2 networks (e.g., Moldova VPS ranges)
-- Enforce 2FA across HR and finance departments
-- Segment EMR systems from general IT infrastructure
-- Implement anomaly-based EDR and real-time alerting
-
----
-
-*Created by: [Your Name or Handle]*  
-*Date: April 2025*  
-*License: TLP:WHITE (Public Use Permitted)*
+A ransomware operator, suspected to be affiliated with Black Basta, targeted a public hospital in Lyon through a spear-phishing email. After exploiting a PDF vulnerability, the attacker gained access, moved laterally, and deployed ransomware, severely impacting hospital operations and demanding ransom in Monero. Data was exfiltrated to foreign infrastructure, with strong indicators of both Type 1 and Type 2 infrastructure usage. The incident highlights the intersection of healthcare vulnerability and financially driven APT-level threats.
