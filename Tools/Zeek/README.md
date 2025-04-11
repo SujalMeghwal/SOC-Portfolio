@@ -13,7 +13,7 @@ This repo contains **very simple Zeek scripts** made for beginners who want to l
 | alert_facebook_visit.zeek     | Alerts if someone goes to Facebook         |
 | log_ssh_connections.zeek      | Logs any SSH connections (port 22)         |
 | alert_google_dns.zeek         | Alerts if 8.8.8.8 is used (Google DNS)     |
-| alert_clear_pass_http.zeek    | Detecting cleartext passwords in HTTP      |
+| http-password.sig             | Detecting cleartext passwords in HTTP      |
 
 ---
 
