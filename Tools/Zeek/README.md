@@ -1,4 +1,3 @@
-````markdown
 # 🔰 Zeek Basic Rules for Beginners
 
 This repo contains **very simple Zeek scripts** made for beginners who want to learn how Zeek works. These small rules help you see network activity like HTTP, DNS, and SSH — and also show how to create basic alerts.
@@ -44,5 +43,3 @@ sudo zeek -i eth0 local.zeek
 - 📘 [Zeek Docs (Official)](https://docs.zeek.org/en/current/)
 - 🧪 Use PCAPs from [malware-traffic-analysis.net](https://www.malware-traffic-analysis.net/)
 - 🎥 YouTube: Search “Zeek network monitoring basics”
-
----
